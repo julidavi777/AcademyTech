@@ -14,8 +14,8 @@ class CourseController extends Controller
      */
     public function index()
     {
-        $subject = Course::all(); 
-        return view('courses.index', compact('subject') ); 
+       $subject = Course::all(); 
+       return view('courses.index', compact('subject')); 
     }
 
     /**
@@ -25,7 +25,8 @@ class CourseController extends Controller
      */
     public function create()
     {
-        return view('courses.create'); 
+       $subject = Course::all(); 
+        return view('courses.create', compact('subject')); 
     }
 
     /**
@@ -36,13 +37,14 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
-        $mensaje = 'EnhoraBuena Se ha registrado extosamente'; 
-        $subject = $request->except('image');
-        if($request->hasFile('image')){
-            $subject['image'] = $request->file('image')->store('courses', 'public'); 
-        }
-        dd($mensaje); 
-        Course::created($subject); 
+        $subject = request()->except('_token', 'image');
+        if(request()->hasFile('image')){
+            $subject['image'] = request('image')->store('courses', 'public'); 
+
+        } 
+        Course::insert($subject); 
+        return response()->json($subject); 
+        
 
     }
 
@@ -52,9 +54,9 @@ class CourseController extends Controller
      * @param  \App\Models\Course  $course
      * @return \Illuminate\Http\Response
      */
-    public function show(Course $course)
+    public function show($id)
     {
-        return view('courses.show'); 
+       
     }
 
     /**
@@ -63,9 +65,9 @@ class CourseController extends Controller
      * @param  \App\Models\Course  $course
      * @return \Illuminate\Http\Response
      */
-    public function edit(Course $course)
+    public function edit($id)
     {
-        return view('courses.edit'); 
+       
     }
 
     /**
@@ -75,9 +77,9 @@ class CourseController extends Controller
      * @param  \App\Models\Course  $course
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Course $course)
+    public function update(Request $request, Course $subject)
     {
-    
+       
     }
 
     /**
@@ -86,8 +88,9 @@ class CourseController extends Controller
      * @param  \App\Models\Course  $course
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Course $course)
+    public function destroy($id)
     {
-        //
+       $subject = Course::destroy($id);
+       return redirect('course'); 
     }
 }

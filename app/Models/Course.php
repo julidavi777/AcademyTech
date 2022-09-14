@@ -12,4 +12,10 @@ class Course extends Model
     [
         'name', 'description', 'duration', 'image'
     ]; 
+    static $rules =[
+        'name' => 'require',
+        'description'=> 'require',
+        'duration'=> 'require'  
+    ];
+    
 }

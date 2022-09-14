@@ -15,4 +15,4 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::resource('/', \App\Http\Controllers\CourseController::class); 
+Route::resource('/course', \App\Http\Controllers\CourseController::class); 

@@ -4,48 +4,50 @@
 @endsection
 @section('content')
 
-<form action="127.0.0.1/" method="post" enctype="multipart/form-data">
-    <div class="w-2/4 bg-white  rounded mx-auto py-3 px-3 text-fuchsia-400 text-lg">
-        <h2 class="text-center mb-3"><b>Por favor ingrese los datos del curso</b></h2>
-        <hr>
-        <div class="px-3 py-3">
-
-            <div class="grid grid-cols-4 gap-4 w-11/12 mx-auto ">
-                <div class="py-1">
-                    <label class="cols-span-2" for="name"><b>Nombre</b></label>
-                </div>
-                <div class=" col-span-3">
-                    <input placeholder="Escriba el nombre del curso" name="name"
-                        class="pl-2 py-1 bg-gray-200 rounded  w-11/12" type="text">
-                </div>
+<div class="w-1/2 rounded  mx-auto bg-white text-fuchsia-400 py-5 px-2">
 
 
-                <div class="py-1">
-                    <label class="cols-span-2" for="name"><b>Duracion</b></label>
-                </div>
-
-                <div class=" col-span-3">
-                    <input placeholder="Duración" name="name" class="pl-2 py-1 bg-gray-200 rounded  w-11/12"
-                        type="text">
-                </div>
-                <div class="py-1">
-                    <label class="cols-span-2" for="name"><b>Descripción</b></label>
-                </div>
-                <div class=" col-span-3">
-                    <textarea class="pl-2 py-1 bg-gray-200 rounded  w-11/12" name="description" id="" rows="5"></textarea>
-                </div>
-                <div class=" col-span-3 bg-gray-200">
-                   <input type="file" name="id" id="">
-                </div>
-                <div class="">
-                    <button type="submi" class="rounded hover:rounded-lg bg-fuchsia-400 py-1  w-3/4 text-center text-white "><b>Enviar</b> </button>
-                </div>
-
-            </div>
-        </div>
-
+    <table class="table-fixed mx-auto 4 text-gray-800 ">
+        <h1 class="text-2xl text-center"><b>LISTA DE CURSOS</b></h1> 
+        <hr class="my-4">
+        <thead class="text-xl text-left">
+            <tr>
+                <th class="">|Nombre</th>
+                <th class="">|Descripción</th>
+                <th class="">|Duracion</th>
+                <th class="">|Imagen</th>
+                <th class="">|Acciones</th>
+            </tr>
+        </thead>
+        <tbody class="text-lg">
+            <tr>
+                @foreach($subject as $course)
+                <td>{{$course->name}}</td>
+                <td>{{$course->description}}</td>
+                <td>{{$course->duration}}</td>
+                <td><img src="{{Storage::url($course->image)}}" width="40" alt="{{$course->description}}"></td>
+                <td><form action="{{url('/course/'.$course->id .'/edit')}}" method="post">
+                @csrf
+                {{method_field('GET')}}
+                <button class="rounded-none px-2 py-1 text-white bg-blue-500">Editar</button> 
+                
+                </form></td>
+                <td><form action="{{url('/course/'.$course->id) }}" method="post">
+                    @csrf
+                    {{ method_field('DELETE')}}
+                    <button class="rounded-none px-2 py-1 text-white bg-red-500" onclick="return confirm('Seguro que deseas eliminar?')">Eliminar</button> 
+                </form>
+            </button>
+            
+        </form></td>
+    </tr>
+    @endforeach
+    </tbody>
+    </table>
+    
     @endsection
-
-</form>
-
+    
+    
+    
+</div>
 </main>
