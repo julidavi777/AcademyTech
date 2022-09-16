@@ -43,7 +43,6 @@ class CourseController extends Controller
 
         } 
         Course::insert($subject); 
-        return response()->json($subject); 
         
 
     }
@@ -56,8 +55,9 @@ class CourseController extends Controller
      */
     public function show($id)
     {
-       
-    }
+        $subject = Course::find($id); 
+        return view('courses.show', compact('subject')); 
+}
 
     /**
      * Show the form for editing the specified resource.
@@ -67,7 +67,8 @@ class CourseController extends Controller
      */
     public function edit($id)
     {
-       
+        $subject = Course::find($id); 
+       return view('courses.edit', compact('subject') );
     }
 
     /**

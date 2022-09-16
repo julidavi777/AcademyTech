@@ -1,6 +1,7 @@
+@extends('courses.form')
 @extends('layouts.tech')
 @section('head')
-@section('title', 'Lista de cursos')
+@section('title', 'Crear un curso')
 @endsection
 @section('content')
 
@@ -10,7 +11,7 @@
         <h2 class="text-center mb-3"><b>Por favor ingrese los datos del curso</b></h2>
         <hr>
         <div class="px-3 py-3">
-
+    
             <div class="grid grid-cols-4 gap-4 w-11/12 mx-auto ">
                 <div class="py-1">
                     <label class="cols-span-2" for="name"><b>Nombre</b></label>
@@ -19,12 +20,12 @@
                     <input placeholder="Escriba el nombre del curso"value="Javascript" name="name"
                         class="pl-2 py-1 bg-gray-200 rounded  w-11/12" type="text">
                 </div>
-
-
+    
+    
                 <div class="py-1">
                     <label class="cols-span-2" for="duration"><b>Duracion</b></label>
                 </div>
-
+    
                 <div class=" col-span-3">
                     <input value="20" placeholder="Duración" name="duration" class="pl-2 py-1 bg-gray-200 rounded  w-11/12"
                         type="text">
@@ -48,12 +49,12 @@
                         class="rounded-full hover:bg-violet-100 bg-fuchsia-300 py-1  w-3/4 text-center text-violet-700 ">Enviar
                     </button>
                 </div>
-
+    
             </div>
         </div>
-
+    
     @endsection
-
+    
 </form>
 
 </main>

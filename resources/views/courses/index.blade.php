@@ -4,7 +4,7 @@
 @endsection
 @section('content')
 
-<div class="w-1/2 rounded  mx-auto bg-white text-fuchsia-400 py-5 px-2">
+<div class="w-2/3 rounded  mx-auto bg-white text-fuchsia-400 py-5 px-2">
 
 
     <table class="table-fixed mx-auto 4 text-gray-800 ">
@@ -16,30 +16,39 @@
                 <th class="">|Descripción</th>
                 <th class="">|Duracion</th>
                 <th class="">|Imagen</th>
-                <th class="">|Acciones</th>
+                <th colspan="3" class=""></th>
             </tr>
         </thead>
         <tbody class="text-lg">
             <tr>
                 @foreach($subject as $course)
-                <td>{{$course->name}}</td>
-                <td>{{$course->description}}</td>
-                <td>{{$course->duration}}</td>
-                <td><img src="{{Storage::url($course->image)}}" width="40" alt="{{$course->description}}"></td>
-                <td><form action="{{url('/course/'.$course->id .'/edit')}}" method="post">
-                @csrf
-                {{method_field('GET')}}
-                <button class="rounded-none px-2 py-1 text-white bg-blue-500">Editar</button> 
-                
-                </form></td>
-                <td><form action="{{url('/course/'.$course->id) }}" method="post">
-                    @csrf
-                    {{ method_field('DELETE')}}
-                    <button class="rounded-none px-2 py-1 text-white bg-red-500" onclick="return confirm('Seguro que deseas eliminar?')">Eliminar</button> 
-                </form>
-            </button>
-            
-        </form></td>
+                 <td class="my-7">{{$course->name}}</td>
+                 <td class="my-7">{{$course->description}}</td>
+                 <td class="my-7">{{$course->duration}}</td>
+                 <td class="my-7"><img src="{{Storage::url($course->image)}}" width="40" alt="{{$course->description}}"></td>
+                <td colspan="3">
+                     <td class="my-7"> 
+                        <div class="grid grid-cols-3">
+                      
+                            <form action="{{url('/course/'.$course->id)}}" method="post">
+                                @csrf
+                                {{method_field('GET')}}
+                                <button class="rounded-none px-2 py-2 text-white bg-gray-800">ver</button>
+                            </form>
+                            
+                            <form action="{{url('/course/'.$course->id .'/edit')}}" method="post">
+                                @csrf
+                                {{method_field('GET')}}
+                                <button class="rounded-none  px-2 py-2 text-white bg-blue-500">Editar</button>
+                            </form>
+                            <form action="{{url('/course/'.$course->id) }}" method="post">
+                                @csrf
+                                {{ method_field('DELETE')}}
+                                <button class="rounded-none px-2 py-2 text-white bg-red-500" onclick="return confirm('Seguro que deseas eliminar?')">Eliminar</button> 
+                            </form>
+                        </div>
+
+                </td>
     </tr>
     @endforeach
     </tbody>
@@ -51,3 +60,4 @@
     
 </div>
 </main>
+
