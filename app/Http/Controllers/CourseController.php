@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Course;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Storage; 
 class CourseController extends Controller
 {
     /**
@@ -67,7 +67,9 @@ class CourseController extends Controller
      */
     public function edit($id)
     {
+      
         $subject = Course::find($id); 
+       
        return view('courses.edit', compact('subject') );
     }
 
@@ -78,9 +80,16 @@ class CourseController extends Controller
      * @param  \App\Models\Course  $course
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Course $subject)
+    public function update(Request $request, $id)
     {
-       
+        $subject = Course::find($id); 
+        $subject->fill(request()->except(['image', '_token', '_method']));
+        if($request->hasFile('image')){
+            $subject->image =  request('image')->store('courses', 'public') ;
+        } 
+        $subject->save(); 
+       return view('courses.edit', compact('subject') );
+
     }
 
     /**

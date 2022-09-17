@@ -8,7 +8,9 @@
 
 
     <table class="table-fixed mx-auto 4 text-gray-800 ">
-        <h1 class="text-2xl text-center"><b>LISTA DE CURSOS</b></h1> 
+        <div class="flex">
+            <h1 class="flex-auto text-2xl text-center"><b>LISTA DE CURSOS</b></h1> 
+            <a class=" rounded mr-4 text-white px-2 py-1 bg-indigo-600" href="{{url('course/create')}}">Crear Curso</a></div>
         <hr class="my-4">
         <thead class="text-xl text-left">
             <tr>

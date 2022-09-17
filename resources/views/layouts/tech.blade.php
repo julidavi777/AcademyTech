@@ -13,9 +13,10 @@
 <body class="bg-indigo-600 text-cyan-100">
 <nav class="bg-indigo-500  relative">
     <div class=" mx-auto container text-cyan-100 flex justify-around mb-20  ">
-        <div>
+        <a href="{{url('course/')}}"><div>
             <img src="{{ asset('logo1.png') }}" alt="">
         </div>
+    </a>
         <div class="my-auto text-end 
          flex  ">
             <div class="flex mx-2">
