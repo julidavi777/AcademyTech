@@ -40,10 +40,9 @@ class CourseController extends Controller
         $subject = request()->except('_token', 'image');
         if(request()->hasFile('image')){
             $subject['image'] = request('image')->store('courses', 'public'); 
-
         } 
         Course::insert($subject); 
-        
+        return redirect('course')->with('message', 'Se ha creado el curso existosamente');         
 
     }
 
@@ -100,7 +99,10 @@ class CourseController extends Controller
      */
     public function destroy($id)
     {
-       $subject = Course::destroy($id);
-       return redirect('course'); 
+        $subject = Course::find($id); 
+        if(Storage::delete('public/'. $subject->image )){
+            Course::destroy($id); 
+        }
+        return redirect('course')->with('message', 'El curso se ha borrado exitosamente'); 
     }
 }

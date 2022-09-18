@@ -4,6 +4,10 @@
 @endsection
 @section('content')
 
+@if(Session::has('message'))
+    {{Session::get('message')}}
+@endif
+
 <div class="w-2/3 rounded  mx-auto bg-white text-fuchsia-400 py-5 px-2">
 
 
