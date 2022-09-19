@@ -37,6 +37,21 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
+        $fields = [
+            'name' => 'require|string|max:45',
+            'description' => 'required|string|max:191',
+            'duration' => 'require|numeric| min:1|max:3',
+            'image' => 'require|max:10000|mimes:jpg,png,jpeg'
+        ];
+
+        $message = [
+            'require' => 'El :attrubute es requerido', 
+            'description.require' => 'la descripción es requerida',
+            'duration.require' => 'la duracion es requerida y solo se aceptan números',
+            'image.require' => 'la imagen es requerida y el peso máximo es de 10Mb'
+
+        ];
+        $this->validate($request,$fields, $message); 
         $subject = request()->except('_token', 'image');
         if(request()->hasFile('image')){
             $subject['image'] = request('image')->store('courses', 'public'); 

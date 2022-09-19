@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,4 +16,15 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::resource('/course', \App\Http\Controllers\CourseController::class); 
+Route::resource('/course', \App\Http\Controllers\CourseController::class);
+
+Auth::routes(['register'=> false, 'reset' => false]);
+
+Route::get('/home', [App\Http\Controllers\CourseController::class, 'index'])->name('home')->middleware('auth');
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/home', [App\Http\Controllers\CourseController::class, 'index'])->name('home');
+});
+
+Route::get('/', function () {
+    return view('welcome');
+});
