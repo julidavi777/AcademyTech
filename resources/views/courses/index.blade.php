@@ -4,9 +4,12 @@
 @endsection
 @section('content')
 
-@if(Session::has('message'))
-    {{Session::get('message')}}
-@endif
+<div class="container  bg-green-100 border-l-4 mb-4 border-green-500  mx-auto text-green-700" role="alert">
+    
+    @if(Session::has('message'))
+        {{Session::get('message')}}
+    @endif
+</div>
 
 <div class="w-2/3 rounded  mx-auto bg-white text-fuchsia-400 py-5 px-2">
 
@@ -59,6 +62,7 @@
     @endforeach
     </tbody>
     </table>
+    {!! $subject->links() !!}
     
     @endsection
     

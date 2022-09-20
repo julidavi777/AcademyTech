@@ -14,7 +14,7 @@ class CourseController extends Controller
      */
     public function index()
     {
-       $subject = Course::all(); 
+       $subject = Course::all()->paginate; 
        return view('courses.index', compact('subject')); 
     }
 
@@ -38,17 +38,17 @@ class CourseController extends Controller
     public function store(Request $request)
     {
         $fields = [
-            'name' => 'require|string|max:45',
+            'name' => 'required|string|max:45',
             'description' => 'required|string|max:191',
-            'duration' => 'require|numeric| min:1|max:3',
-            'image' => 'require|max:10000|mimes:jpg,png,jpeg'
+            'duration' => 'required|numeric| min:1|max:99',
+            'image' => 'required|max:10000|mimes:jpg,png,jpeg'
         ];
 
         $message = [
-            'require' => 'El :attrubute es requerido', 
-            'description.require' => 'la descripción es requerida',
-            'duration.require' => 'la duracion es requerida y solo se aceptan números',
-            'image.require' => 'la imagen es requerida y el peso máximo es de 10Mb'
+            'required' => 'El :attrubute es requerido', 
+            'description.required' => 'la descripción es requerida',
+            'duration.required' => 'la duracion es requerida y solo se aceptan números',
+            'image.required' => 'la imagen es requerida y el peso máximo es de 10Mb'
 
         ];
         $this->validate($request,$fields, $message); 
@@ -84,7 +84,7 @@ class CourseController extends Controller
       
         $subject = Course::find($id); 
        
-       return view('courses.edit', compact('subject') );
+       return view('courses.index', compact('subject'))->with('message', 'El curso ha sido editado ');
     }
 
     /**
