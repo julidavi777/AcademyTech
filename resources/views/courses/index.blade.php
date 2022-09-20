@@ -62,7 +62,6 @@
     @endforeach
     </tbody>
     </table>
-    {!! $subject->links() !!}
     
     @endsection
     
